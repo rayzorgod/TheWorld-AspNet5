@@ -1,0 +1,41 @@
+﻿<!--Moved from Trips.cshtml-->
+<!--<div ng-controller="tripsController as vm" class="col-md-6 col-md-offset-3"> Can get rid of ng-controller as that is assigned by the routing in app-trips.js-->   
+<div class="col-md-6 col-md-offset-3">
+    <div ng-cloak>
+        <!-- as just gives a variable name that we can use as databinding out of the controller specified. -->
+        <!--Flicker with ng-show and an expression {...} and issue with ng-cloak which does not seem to work!!!! FIX -->
+        <!--<div ng-show="vm.errorMessage" class="text-danger">{{vm.errorMessage}}</div>--> <!--This ng-cloak doesn't work even if add css to site.css*@ @*Commented out to make site pretty for now and text not to flicker.-->
+        <div class="ng-hide text-danger" ng-show="true"> {{vm.errorMessage}}</div> <!--This also works but requires you add an ng-hide css-->
+        <div ng-show="vm.errorMessage" class="text-danger"><span ng-bind="vm.errorMessage"></span></div>  <!--BEST SOLUTION for single - Only show message if error exists and it has a value. Could of used an expression {vm.errorMessage} and use ng-cloak but still seemed to flicker...I reckon it is because new version of angular and in old or newer versions it will go.-->
+        <div class="text-danger" data-ng-if="vm.errorMessage">{{vm.errorMessage}}</div>  <!--BESST SOLUTION for an area - Quite a nice work around to still allow expression in the code....-->
+
+        <div ng-show="vm.isBusy" class="text-center"><span class="fa fa-spinner fa-spin"></span>Loading...</div><!--Replaced with own directive-->
+        <div wait-cursor ng-show="vm.isBusy"></div><!--so now wait-cursor can be a re-usable component used in the application-->
+        <wait-cursor display-when="vm.isBusy"></wait-cursor> <!--With angular it's quite clever we  also use wait-cursor as an Element aswell as an attribute. If we want to restrict to just this, use restrict:E in the directive-->
+        <!--Also have used our own attribute displayWhen, this properties gets passed down to our directive template and can be used within there.e.g, might want to change various parts like font colour, messages, showing different parts based on different values passed here-->
+
+        <!--Interesting Note about Directives : Some people use directives for simple custom control tags/attributes to use here and there, some organisation use directives for everything, so even a whole view is contained and wrapped with a directive. Interesting, I guess it gives that area a bit more control and power and can specific custom attributes throughout the whole view so maybe cleaner.-->
+
+        <table class="table table-responsive table-striped">
+            <tr ng-repeat="trip in vm.trips">
+                <td>{{trip.name}}</td>
+                <td>{{trip.created | date:'MM-dd-yyyy' }}</td>
+                <!--As you know the Hash tag acts like an anchor tag to an ID on the page if there is one.-->
+                <!--Also, if there is a slash past it angular $location detects this in the url and uses its own routing mechanism.
+                You can tell angular with it's $locationProvider.html5Mode(true); in the routing to not require the # but angular will still check the url and see if it matches an angular route--> 
+                <td><a ng-href="#/editor/{{ trip.name}}" class="btn btn-sm btn-primary">Manage</a></td> <!--ng-href so we can do the databinding expression inside the href tag oppose to just the body-->  <!--the # tells angular it can be routed by angular-->
+            </tr>
+        </table>
+    </div>
+    <form novalidate name="newTripForm" ng-submit="vm.addTrip()">
+        <div class="form-group">
+            <label for="name">Trip Name</label>
+            <input class="form-control" type="text" id="name" name="name" ng-model="vm.newTrip.name" required ng-minlength="5" /> <!--Remember we have novalidate and you can put what you like in the html so angularjs itself looks if it's got an required and handles it.-->
+        </div>
+        <div class="form-group">
+            <span ng-show="newTripForm.name.$error.required" class="text-warning">Name is required.</span>
+            <span ng-show="newTripForm.name.$error.minlength" class="text-warning">Must be at least 5 characters</span>
+            <input type="submit" value="Add" class="btn btn-success btn-sm" ng-disabled="newTripForm.$invalid" /> <!--Disables the button until all the validation is allowed then enable-->
+        </div>
+    </form>
+</div>

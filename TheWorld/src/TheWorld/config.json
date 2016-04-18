@@ -1,0 +1,17 @@
+﻿{
+  "AppSettings": {
+    "SiteEmailAddress": "rayzorgod@hotmail.com"
+  },
+  "Data": {
+    "WorldContextConnection": "Server=(localdb)\\ProjectsV12;Database=TheWorldDB;Trusted_Connection=true;MultipleActiveResultSets=true;"
+  }
+}
+
+// NOTES ON Dependencies FILES:
+
+//Project.json contains information about our asp.net application including all of the SERVER SIDE dependencies
+
+//Bower.json contains all the CLIENT Side dependencies.
+
+//Package.json - (NPM) node package manager - you can use the package.json (NPM interface) to get the different Node based tool dependencies into your environment,like GULP and GRUNT which are based on Node (strictly for Node related tools/librabries).
+//                Gulp is a task runner - so you can define in js file things you want to happen on a periodic basis. Gulp-uglifier makes smaller version of your js file, takes out whitspace, variable name smaller (basically a compressor) so sending the file is smaller over the internet.

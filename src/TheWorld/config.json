@@ -26,3 +26,8 @@
 //In startup.cs -> there is an Startup event and IConfiguration object and it contains all the information for the environment and 'config.json' . Config.json is to replace web.config.
 //Once  IConfiguration is setup, next there is an ConfigureServices event and it contains IServiceCollection services and you can do Microsofot own in built Dependency injection to all your I Interefaces.
 //Once IServiceCollection is setup, next there is a Configure event and it contains IApplicationBuilder object and it allows us to OPT-IN to the asp.net services.
+
+//Test change
+
+
+//Additional changes.

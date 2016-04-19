@@ -1,4 +1,5 @@
 {
+
   "webroot": "wwwroot",
   "version": "1.0.0-*",
 
@@ -18,11 +19,12 @@
     "Microsoft.AspNet.Diagnostics": "1.0.0-beta8"
   },
 
+  "__comment1": "The command called 'web' is to say hay this how i want to host it., e.g in command line type 'dnx web' then it will run and host from command line. Good for using outside .net Windows environment to run",
   "commands": {
     "web": "Microsoft.AspNet.Server.Kestrel",
     "ef": "EntityFramework.Commands"
   },
-
+  "__comment": "frameworks - is so when we do 'dnx run' in the command line - dnx will get the .net execution dlls to look at this and see what .net frameworks (4.5.1 and core5) and compile and run/execute (run the main with console apps or run startup with web apps) on the fly.",
   "frameworks": {
     "dnx451": {
       "dependencies": {

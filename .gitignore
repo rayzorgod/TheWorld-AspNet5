@@ -244,4 +244,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 
-src/TheWorld/wwwroot/lib/
+src/TheWorld/wwwroot/lib/_app/
